@@ -56,4 +56,4 @@ Run `uv sync` to install from the locked versions; review `uv.lock` before doing
 
 ## Reporting an issue
 
-Open a private security advisory on the GitHub repo, or contact the maintainer directly. Please don't open a public issue for anything sensitive.
+Open a [private security advisory](https://github.com/jkan67-de/apple-reminders-mcp-cli/security/advisories/new) on the repo. Don't open a public issue for anything sensitive.
