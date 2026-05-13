@@ -6,47 +6,25 @@
   "description": "Manage Apple Reminders from Claude — create, complete, delete, and list reminders synced with iPhone.",
   "server": {
     "type": "python",
-    "entry_point": "main.py",
+    "entry_point": "apple_reminders.main",
     "mcp_config": {
       "command": "uv",
       "args": [
         "run",
         "--directory",
         "${HOME}/apple-reminders-mcp-cli",
-        "python",
-        "main.py"
+        "apple-reminders-mcp"
       ]
     }
   },
   "tools": [
-    {
-      "name": "list_reminders",
-      "description": "List all Apple Reminders from iPhone via CloudKit"
-    },
-    {
-      "name": "list_reminder_lists",
-      "description": "List all Apple Reminder lists"
-    },
-    {
-      "name": "create_reminder",
-      "description": "Create a reminder with title, notes, list, priority, flag, and URL"
-    },
-    {
-      "name": "create_multiple_reminders",
-      "description": "Create multiple reminders at once with full field support"
-    },
-    {
-      "name": "complete_reminder",
-      "description": "Mark a reminder as complete by title"
-    },
-    {
-      "name": "delete_reminder",
-      "description": "Delete a reminder by title"
-    },
-    {
-      "name": "list_pending_commands",
-      "description": "List commands waiting to be processed on iPhone"
-    }
+    { "name": "list_reminders", "description": "List all Apple Reminders from iPhone via CloudKit" },
+    { "name": "list_reminder_lists", "description": "List all Apple Reminder lists" },
+    { "name": "create_reminder", "description": "Create a reminder with title, notes, list, priority, flag, and URL" },
+    { "name": "create_multiple_reminders", "description": "Create multiple reminders at once with full field support" },
+    { "name": "complete_reminder", "description": "Mark a reminder as complete by title" },
+    { "name": "delete_reminder", "description": "Delete a reminder by title" },
+    { "name": "list_pending_commands", "description": "List commands waiting to be processed on iPhone" }
   ],
   "license": "MIT"
 }

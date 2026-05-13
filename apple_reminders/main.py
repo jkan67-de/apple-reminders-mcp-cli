@@ -1024,7 +1024,12 @@ def shutdown_handler(signum, frame):
     sys.exit(0)
 
 
-if __name__ == "__main__":
+def run() -> None:
+    """Console-script entry point for the MCP server."""
     signal.signal(signal.SIGINT, shutdown_handler)
     signal.signal(signal.SIGTERM, shutdown_handler)
     mcp.run(transport="stdio")
+
+
+if __name__ == "__main__":
+    run()

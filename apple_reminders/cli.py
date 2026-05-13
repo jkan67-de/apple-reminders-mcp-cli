@@ -21,7 +21,7 @@ import json
 import sys
 from typing import Any
 
-import main as rmd  # the MCP module — reuse its functions
+from . import main as rmd  # the MCP module — reuse its functions
 
 
 def emit(obj: Any, pretty: bool) -> None:
