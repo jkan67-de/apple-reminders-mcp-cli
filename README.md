@@ -6,10 +6,10 @@
 
 I live on Linux but my reminders live on my iPhone. Apple gives you read access to Reminders via CloudKit, but no public write API. So I built this:
 
-- a **CLI** I actually use day-to-day to drop reminders into my iPhone from the shell
-- an **MCP server** wrapping the same operations so Claude Code (or any MCP client) can do it too
+- **CLI** — what I actually use day-to-day. Drop reminders into my iPhone straight from the shell. Claude Code can use it too (it just shells out).
+- **MCP server** — same operations, exposed as MCP tools. The reason I bothered: **Claude Desktop chat** can't shell out, but it *can* talk to MCP servers — so this lets me ask Claude on my desktop to make a reminder and have it land on my phone.
 
-The CLI is the primary thing. The MCP is the bonus.
+Same backend either way.
 
 ## How it works
 
@@ -101,7 +101,7 @@ Without the email-trigger automation, writes still queue to iCloud Drive — the
 
 ## Use it — CLI
 
-This is what I actually use. The `reminders` command is installed by `uv sync` via `pyproject.toml` console scripts:
+The primary way I use this. The `reminders` command is installed by `uv sync` via `pyproject.toml` console scripts — works from any shell, and Claude Code can shell out to it directly without any MCP registration:
 
 ```bash
 uv run reminders lists                          # all reminder lists
@@ -135,16 +135,31 @@ EOF
 chmod +x ~/.local/bin/reminders
 ```
 
-## Use it — MCP (Claude Code)
+## Use it — MCP (Claude Desktop)
 
-Register the server once:
+The reason this exists: **Claude Desktop chat** can't run shell commands, but it can call MCP servers. Wire this up once and you can ask Claude on your desktop to add a reminder, and it lands on your phone.
+
+Register the server (works for Claude Desktop, Claude Code, or any MCP client):
 
 ```bash
+# Claude Desktop / any MCP client — add this to claude_desktop_config.json:
+{
+  "mcpServers": {
+    "apple-reminders": {
+      "command": "uv",
+      "args": ["run", "--directory", "/absolute/path/to/apple-reminders-mcp-cli", "apple-reminders-mcp"]
+    }
+  }
+}
+
+# Claude Code — one-liner:
 claude mcp add --scope user apple-reminders \
   $(which uv) -- run --directory $HOME/apple-reminders-mcp-cli apple-reminders-mcp
 ```
 
-After that, Claude Code gets 7 tools: `mcp__apple-reminders__create_reminder`, `…__list_reminders`, `…__complete_reminder`, `…__delete_reminder`, `…__create_multiple_reminders`, `…__list_reminder_lists`, `…__list_pending_commands`.
+Either way, the client gets 7 tools: `create_reminder`, `list_reminders`, `complete_reminder`, `delete_reminder`, `create_multiple_reminders`, `list_reminder_lists`, `list_pending_commands` (prefixed `mcp__apple-reminders__*` in Claude Code).
+
+> If you only ever use Claude **Code**, skip the MCP — Code can just shell out to the CLI.
 
 ## Troubleshooting
 
