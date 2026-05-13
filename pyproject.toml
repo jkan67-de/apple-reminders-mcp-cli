@@ -1,0 +1,10 @@
+[project]
+name = "apple-reminders"
+version = "1.0.0"
+description = "Apple iCloud Reminders — MCP server + CLI tool"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "pyicloud>=2.4.0",
+]

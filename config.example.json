@@ -1,0 +1,19 @@
+{
+  "_comment": "Copy this file to ~/.config/apple-reminders/config.json and fill in your own values. NEVER commit the real config.json — it contains app-specific passwords. Keep it chmod 600.",
+
+  "_required_for_read": "Apple ID + app-specific password (NOT your Apple ID password). Generate one at https://appleid.apple.com/account/manage > Security > App-Specific Passwords.",
+  "apple_id": "you@example.com",
+  "app_password": "xxxx-xxxx-xxxx-xxxx",
+
+  "_required_for_write_email_trigger": "Gmail account + Gmail app password used to send the silent trigger email that fires the iOS Shortcut. trigger_email_to is the iCloud address the iOS Personal Automation watches.",
+  "smtp_user": "you@gmail.com",
+  "smtp_app_password": "xxxxxxxxxxxxxxxx",
+  "trigger_email_to": "your-icloud@icloud.com",
+  "trigger_email_subject": "PROCESS-REMINDERS-TRIGGER",
+  "smtp_host": "smtp.gmail.com",
+  "smtp_port": 587,
+
+  "_optional_for_cleanup": "Used by 'reminders cleanup' to delete trigger emails from the iCloud Inbox. icloud_imap_user is the same iCloud address as trigger_email_to. icloud_imap_app_password is a SEPARATE app-specific password (generated at appleid.apple.com) for IMAP access.",
+  "icloud_imap_user": "your-icloud@icloud.com",
+  "icloud_imap_app_password": "xxxx-xxxx-xxxx-xxxx"
+}

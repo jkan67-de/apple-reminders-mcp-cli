@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# uv / pip
+.pip-cache/
+
+# Project state — runtime-only, never commit
+state/
+*.jsonl
+
+# Local secrets / config (lives under ~/.config/apple-reminders/ but guard anyway)
+config.json
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
